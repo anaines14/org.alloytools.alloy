@@ -10,13 +10,14 @@ import at.unisalzburg.dbresearch.apted.node.StringNodeData;
 import at.unisalzburg.dbresearch.apted.parser.BracketStringInputParser;
 import edu.mit.csail.sdg.alloy4.A4Reporter;
 import edu.mit.csail.sdg.alloy4.ErrorWarning;
-import edu.mit.csail.sdg.ast.Module;
+import edu.mit.csail.sdg.ast.Expr;
+import edu.mit.csail.sdg.parser.CompModule;
 import edu.mit.csail.sdg.parser.CompUtil;
 
 public class astDiff {
 
     public static void main(String[] args) {
-        apted();
+        alloyParse(args);
     }
 
     public static void alloyParse(String[] args) {
@@ -34,10 +35,17 @@ public class astDiff {
         for (String filename : args) {
             // Parse+typecheck the model
             System.out.println("=========== Parsing+Typechecking " + filename + " =============");
-            Module world = CompUtil.parseEverything_fromFile(rep, null, filename);
+
+            CompModule world = CompUtil.parseEverything_fromFile(rep, null, filename);
             world.showAsTree(null);
+
+            // get test predicate
+            Expr pred = world.getAllFunc().get(0).getBody();
+            AptedAST ast = new AptedAST(pred);
+            System.out.println(ast);
         }
     }
+
 
     public static void apted() {
 
@@ -61,3 +69,4 @@ public class astDiff {
     }
 
 }
+
