@@ -22,8 +22,6 @@ public class AptedAST {
         this.name = "";
         this.children = new ArrayList<AptedAST>();
 
-        System.out.println(expression.getClass().getSimpleName());
-
         if (expression.getClass().equals(ExprUnary.class))
             this.parse((ExprUnary) expression);
         else if (expression.getClass().equals(ExprQt.class))

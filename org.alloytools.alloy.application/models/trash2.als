@@ -8,5 +8,5 @@ sig Protected in File {}
 
 /* The trash is empty. */
 pred inv1 {
-	not some f: File | f in Trash 
+	historically (once (no Trash & Protected)) 
 }
