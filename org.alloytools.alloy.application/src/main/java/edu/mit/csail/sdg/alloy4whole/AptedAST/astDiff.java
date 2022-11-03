@@ -1,4 +1,4 @@
-package edu.mit.csail.sdg.alloy4whole;
+package edu.mit.csail.sdg.alloy4whole.AptedAST;
 
 
 import java.util.List;
@@ -37,9 +37,7 @@ public class astDiff {
             System.out.println("=========== Parsing+Typechecking " + filename + " =============");
 
             CompModule world = CompUtil.parseEverything_fromFile(rep, null, filename);
-            world.showAsTree(null);
 
-            // get test predicate
             Expr pred = world.getAllFunc().get(0).getBody();
             AptedAST ast = new AptedAST(pred);
             System.out.println(ast);
